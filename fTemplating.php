@@ -5,14 +5,13 @@
  * @copyright  Copyright (c) 2007-2011 Will Bond, others
  * @author     Will Bond [wb] <will@flourishlib.com>
  * @author     Matt Nowack [mn] <mdnowack@gmail.com>
- * @author     Jeff Turcotte [jt] <jeff@imarc.net>
  * @license    http://flourishlib.com/license
  *
  * @package    Flourish
  * @link       http://flourishlib.com/fTemplating
  *
  * @version    1.0.0b24
- * @changes    1.0.0b24  Added getRootPath() to retrieve the path fTemplating was instantiated with [jt, 2012-10-24]
+ * @changes    1.0.0b24  Added .phtml extension to `$extension_map` for ::verifyValue() [as, 2013-04-15]
  * @changes    1.0.0b23  Added a default `$name` for ::retrieve() to mirror ::attach() [wb, 2011-08-31]
  * @changes    1.0.0b22  Backwards Compatibility Break - removed the static method ::create(), added the static method ::attach() to fill its place [wb, 2011-08-31]
  * @changes    1.0.0b21  Fixed a bug in ::enableMinification() where the minification cache directory was sometimes not properly converted to a web path [wb, 2011-08-31]
@@ -711,17 +710,6 @@ class fTemplating
 		}
 
 		return $value;
-	}
-
-
-	/**
-	 * Gets the root path
-	 *
-	 * @return string  The root path for the instance
-	 */
-	public function getRootPath()
-	{
-		return $this->root;
 	}
 
 
@@ -1487,9 +1475,8 @@ class fTemplating
 		$extension_map = array(
 			'inc'  => 'php',
 			'php5' => 'php',
-			'xml'  => 'rss',
-			'sass' => 'css',
-			'scss' => 'css'
+			'phtml' => 'php',
+			'xml'  => 'rss'
 		);
 
 		if (isset($extension_map[$extension])) {
@@ -1501,7 +1488,7 @@ class fTemplating
 				'The element specified, %1$s, has a value whose path, %2$s, does not end with a recognized file extension: %3$s.',
 				$element,
 				$path,
-				'.css, .inc, .js, .php, .php5, .rss, .xml'
+				'.css, .inc, .js, .php, .php5, .phtml, .rss, .xml'
 			);
 		}
 
